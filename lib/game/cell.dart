@@ -19,21 +19,12 @@ enum CellContent {
   none,
   x,
   o,
-  winX,
-  winO,
 }
 
 extension CellContentExt on CellContent {
   Paint get paint {
     return Paint()
       ..color = Colors.black
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 15;
-  }
-
-  Paint get highlightPaint {
-    return Paint()
-      ..color = Colors.red
       ..style = PaintingStyle.stroke
       ..strokeWidth = 15;
   }

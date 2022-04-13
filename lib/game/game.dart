@@ -1,11 +1,26 @@
 import 'dart:collection';
+import 'dart:typed_data';
 
 import 'package:tic_tac_toe/game/cell.dart';
 import 'package:flutter/material.dart';
+import 'package:bit_array/bit_array.dart';
 
 class GameGrid extends StatefulWidget {
   HashMap<int, CellContent> gameState = HashMap();
   CellContent player = CellContent.x;
+  final winVectors = List<BitArray>.of([
+    // each row
+    BitArray.parseBinary("000000111"),
+    BitArray.parseBinary("000111000"),
+    BitArray.parseBinary("111000000"),
+    // each column
+    BitArray.parseBinary("100100100"),
+    BitArray.parseBinary("010010010"),
+    BitArray.parseBinary("001001001"),
+    // each diagonal
+    BitArray.parseBinary("100010001"),
+    BitArray.parseBinary("001010100"),
+  ]);
 
   final void Function(VoidCallback fn) updateParent;
 
@@ -20,6 +35,21 @@ class GameGrid extends StatefulWidget {
     return gameState[idx];
   }
 
+  BitArray getPlayerVector() {
+    BitArray arr = BitArray(9);
+
+    arr.clearAll();
+    gameState.forEach((idx, value) {
+      if (player == value) {
+        arr.setBit(idx);
+      } else {
+        arr.clearBit(idx);
+      }
+    });
+
+    return arr;
+  }
+
   cellClicked(int idx) {
     if (gameState[idx] == CellContent.none) {
       gameState[idx] = player;
@@ -29,11 +59,19 @@ class GameGrid extends StatefulWidget {
   }
 
   void checkGameState() {
+    var playerVector = getPlayerVector();
+    winVectors.forEach((element) {
+      final result = playerVector & element;
+      if (result == element) {
+        print("Win $player");
+        restartGame();
+      }
+    });
+
     if (!gameState.containsValue(CellContent.none)) {
       print("Game Over!");
       restartGame();
     }
-    print(gameState);
   }
 
   void restartGame() {
