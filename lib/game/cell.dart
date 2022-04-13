@@ -1,5 +1,8 @@
+import 'package:tic_tac_toe/game/home.dart';
 import 'package:tic_tac_toe/game/painter.dart';
 import 'package:flutter/material.dart';
+
+import 'game.dart';
 
 class GameCell extends StatefulWidget {
   final int index;
@@ -27,6 +30,17 @@ extension CellContentExt on CellContent {
       ..color = Colors.black
       ..style = PaintingStyle.stroke
       ..strokeWidth = 15;
+  }
+
+  GameEndReason get gameEndReason {
+    switch (this) {
+      case CellContent.x:
+        return GameEndReason.xWin;
+      case CellContent.o:
+        return GameEndReason.oWin;
+      default:
+        return GameEndReason.gameOver;
+    }
   }
 
   Widget get widget {
