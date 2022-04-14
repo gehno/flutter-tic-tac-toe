@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/util/util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:country_icons/country_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../main.dart';
@@ -16,7 +15,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   List<LanguageInfo> infos =
       AppLocalizations.supportedLocales.map((e) => LanguageInfo(e)).toList();
-  int selectedLanguage = 0;
+  int selectedLanguage = 0; //todo: has to load from storage
 
   void setSelectedLanguage(LanguageInfo? value) {
     if (value != null) {
