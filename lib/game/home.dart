@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/game/game.dart';
 
+import '../util/util.dart';
+
 class GameHomeScreen extends StatefulWidget {
   const GameHomeScreen({
     Key? key,
@@ -18,7 +20,7 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
         scale: 4,
         child: ElevatedButton.icon(
           icon: const Icon(Icons.play_arrow),
-          label: const Text("Start Game"),
+          label: Text(getUiText(context).play),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {

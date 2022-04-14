@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'game/game.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tic_tac_toe/util/util.dart';
 import 'game/home.dart';
 import 'menu/drawer.dart';
 
@@ -8,7 +8,7 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static const titleColor = Colors.blue;
   static const titleTextStyle = TextStyle(
     color: Colors.white,
@@ -18,33 +18,50 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  createState() => _MyAppState();
+
+  static _MyAppState of(BuildContext context) {
+    final found = context.findAncestorStateOfType<_MyAppState>();
+    if (found != null) {
+      return found;
+    }
+    throw Exception("_MyAppState not found.");
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale? _locale = null;
+
+  void setLocale(Locale value) {
+    setState(() {
+      _locale = value;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tic Tac Toe',
+      locale: _locale,
+      onGenerateTitle: (BuildContext context) => getUiText(context).ticTacToe,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        primarySwatch: titleColor,
+        primarySwatch: MyApp.titleColor,
       ),
-      home: const MyHomePage(title: 'Tic Tac Toe'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.title,
+          getUiText(context).ticTacToe,
           style: MyApp.titleTextStyle,
         ),
         leading: Builder(
@@ -61,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       drawer: const DrawerWidger(),
       body: const GameHomeScreen(),
-      // body: Center(child: GameGrid(setState)),
       extendBody: false,
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/game/model.dart';
 import 'package:tic_tac_toe/main.dart';
 
+import '../util/util.dart';
+
 class GameScreen extends StatefulWidget {
   late GameModel model;
 
@@ -78,8 +80,8 @@ class PlayerListener extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text(
-                "Current Player",
+              Text(
+                 getUiText(context).player,
                 style: MyApp.titleTextStyle,
               ),
               Transform.scale(

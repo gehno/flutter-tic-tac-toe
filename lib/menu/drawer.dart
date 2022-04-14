@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/menu/more.dart';
 import 'package:tic_tac_toe/menu/settings.dart';
 import 'package:tic_tac_toe/menu/stats.dart';
+import 'package:tic_tac_toe/util/util.dart';
 
 import '../main.dart';
 import 'about.dart';
@@ -18,19 +19,19 @@ class DrawerWidger extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const DrawerHeader(
+          DrawerHeader(
             child: Text(
-              "Options",
+              getUiText(context).options,
               style: MyApp.titleTextStyle,
             ),
-            decoration: BoxDecoration(color: MyApp.titleColor),
+            decoration: const BoxDecoration(color: MyApp.titleColor),
           ),
           Expanded(
             child: Column(
               children: [
                 ListTile(
                   leading: const Icon(Icons.settings),
-                  title: const Text("Settings"),
+                  title: Text(getUiText(context).settings),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
@@ -41,7 +42,7 @@ class DrawerWidger extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.bar_chart),
-                  title: const Text("Stats"),
+                  title: Text(getUiText(context).stats),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
@@ -52,7 +53,7 @@ class DrawerWidger extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.more_horiz),
-                  title: const Text("More"),
+                  title: Text(getUiText(context).more),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
@@ -67,7 +68,7 @@ class DrawerWidger extends StatelessWidget {
           ListTile(
             tileColor: Colors.grey.shade300,
             leading: const Icon(Icons.info),
-            title: const Text("About"),
+            title: Text(getUiText(context).info),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
