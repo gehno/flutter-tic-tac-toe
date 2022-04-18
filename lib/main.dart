@@ -30,18 +30,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale = null;
+  Locale? selectedLanguageCode;
+
+  Map<String, Locale> locales = {
+    for (var e in AppLocalizations.supportedLocales) e.languageCode: e
+  };
 
   void setLocale(Locale value) {
+
     setState(() {
-      _locale = value;
+      selectedLanguageCode = value;
     });
+  }
+
+  Locale? getLocale() {
+    return locales[selectedLanguageCode];
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: _locale,
+      locale: selectedLanguageCode,
       onGenerateTitle: (BuildContext context) => getUiText(context).ticTacToe,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
