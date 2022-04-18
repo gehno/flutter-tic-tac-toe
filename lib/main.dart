@@ -30,27 +30,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? selectedLanguageCode;
-
-  Map<String, Locale> locales = {
-    for (var e in AppLocalizations.supportedLocales) e.languageCode: e
-  };
+  Locale? selectedLocale;
 
   void setLocale(Locale value) {
-
     setState(() {
-      selectedLanguageCode = value;
+      selectedLocale = value;
     });
   }
 
-  Locale? getLocale() {
-    return locales[selectedLanguageCode];
+  Locale? get locale {
+    return selectedLocale;
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: selectedLanguageCode,
+      locale: selectedLocale,
       onGenerateTitle: (BuildContext context) => getUiText(context).ticTacToe,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -85,7 +80,7 @@ class MyHomePage extends StatelessWidget {
           },
         ),
       ),
-      drawer: const DrawerWidger(),
+      drawer: const DrawerWidget(),
       body: const GameHomeScreen(),
       extendBody: false,
     );

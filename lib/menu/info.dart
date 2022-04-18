@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../util/util.dart';
 
-class MoreScreen extends StatelessWidget {
-  const MoreScreen({Key? key}) : super(key: key);
+class InfoScreen extends StatelessWidget {
+  const InfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getUiText(context).more),
+        title: Text(getUiText(context).info),
       ),
       body: Center(
-        child: Text(getUiText(context).more),
+        child: Text(getUiText(context).info),
       ),
     );
   }

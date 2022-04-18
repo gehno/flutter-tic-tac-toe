@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   String get selectedLanguage {
-    Locale? locale = MyApp.of(context).getLocale();
+    Locale? locale = MyApp.of(context).locale;
     if (locale != null) {
       return locale.languageCode;
     }
@@ -54,6 +54,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: value.languageWidget,
                 );
               }).toList(),
+            ),
+          ),
+          const Center(child: Text("More Options...")),
+          Center(
+            child: Slider(
+              min: 0,
+              max: 10,
+              value: 0,
+              onChanged: (value) {},
             ),
           ),
         ],

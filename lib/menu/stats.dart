@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/util/util.dart';
 
 class StatsScreen extends StatelessWidget {
   const StatsScreen({Key? key}) : super(key: key);
@@ -6,9 +7,12 @@ class StatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text("Stats..."),
+      appBar: AppBar(
+          title: Text(
+        getUiText(context).stats,
+      )),
+      body: Center(
+        child: Text(getUiText(context).stats),
       ),
     );
   }

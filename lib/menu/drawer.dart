@@ -5,10 +5,10 @@ import 'package:tic_tac_toe/menu/stats.dart';
 import 'package:tic_tac_toe/util/util.dart';
 
 import '../main.dart';
-import 'about.dart';
+import 'info.dart';
 
-class DrawerWidger extends StatelessWidget {
-  const DrawerWidger({
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({
     Key? key,
   }) : super(key: key);
 
@@ -72,7 +72,7 @@ class DrawerWidger extends StatelessWidget {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return const AboutScreen();
+                  return const InfoScreen();
                 },
               ));
             },
