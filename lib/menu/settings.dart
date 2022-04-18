@@ -39,12 +39,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(getUiText(context).settings),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
+      body: ListView(
         children: [
-          Center(child: Text(getUiText(context).language)),
-          Center(
-            child: DropdownButton<LanguageInfo>(
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: Text(getUiText(context).language),
+            trailing: DropdownButton<LanguageInfo>(
               value: infos[selectedLanguage],
               onChanged: (value) => {setSelectedLanguage(value)},
               items: infos.values
@@ -54,15 +54,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: value.languageWidget,
                 );
               }).toList(),
-            ),
-          ),
-          const Center(child: Text("More Options...")),
-          Center(
-            child: Slider(
-              min: 0,
-              max: 10,
-              value: 0,
-              onChanged: (value) {},
             ),
           ),
         ],
