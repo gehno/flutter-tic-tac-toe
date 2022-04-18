@@ -20,7 +20,10 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '2.10.4'
-    - run: flutter pub get
+
+    - uses: bluefireteam/flutter-gh-pages@v7
+      with:
+        baseHref: /flutter-tic-tac-toe/
+        
     - run: flutter test
-    - run: flutter build web
     
