@@ -77,6 +77,11 @@
       scriptTag.src = 'main.dart.js';
       scriptTag.type = 'application/javascript';
       document.body.append(scriptTag);
+      setTimeout(removeLoader, 10000); //10s
+    }
+
+    function removeLoader() {
+      document.getElementById('loader').remove();
     }
 
     if ('serviceWorker' in navigator) {

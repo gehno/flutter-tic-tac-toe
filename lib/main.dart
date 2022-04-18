@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  static const titleColor = Colors.blue;
+  static const titleColor = Colors.yellow;
   static const titleTextStyle = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.normal,
