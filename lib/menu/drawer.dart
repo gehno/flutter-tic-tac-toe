@@ -24,7 +24,7 @@ class DrawerWidget extends StatelessWidget {
               getUiText(context).options,
               style: MyApp.titleTextStyle,
             ),
-            decoration: const BoxDecoration(color: MyApp.titleColor),
+            decoration: BoxDecoration(color: MyApp.of(context).mainColor),
           ),
           Expanded(
             child: Column(

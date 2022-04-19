@@ -1,6 +1,7 @@
 import 'package:tic_tac_toe/game/home.dart';
 import 'package:tic_tac_toe/game/painter.dart';
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/main.dart';
 
 import 'game.dart';
 
@@ -68,7 +69,7 @@ class CellState extends State<GameCell> {
       style: ButtonStyle(
           shadowColor: MaterialStateProperty.all<Color>(Colors.black),
           backgroundColor:
-              MaterialStateProperty.all<Color>(Colors.blue.shade200)),
+              MaterialStateProperty.all<Color>(MyApp.of(context).mainColor.shade200)),
       child: widget.getCellContent(widget.index)!.widget,
       onPressed: () => {
         setState(

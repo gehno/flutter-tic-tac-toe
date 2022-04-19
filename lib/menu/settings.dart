@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:tic_tac_toe/util/util.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../main.dart';
 
@@ -51,9 +51,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   .map<DropdownMenuItem<LanguageInfo>>((LanguageInfo value) {
                 return DropdownMenuItem<LanguageInfo>(
                   value: value,
-                  child: value.languageWidget,
+                  child: value.widget,
                 );
               }).toList(),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.color_lens),
+            title: Text(getUiText(context).color),
+            trailing: ElevatedButton(
+              child:
+                  Text("#${Colors.red.value.toRadixString(16).toUpperCase()}"),
+              onPressed: () {
+                showColorPickerDialog(context);
+              },
             ),
           ),
         ],
@@ -62,24 +73,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
+void showColorPickerDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(getUiText(context).color),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              onColorChanged: (value) {}, 
+              pickerColor: Colors.red,
+            ),
+          ),
+        );
+      });
+}
+
 class LanguageInfo {
   late final Widget languageCodeWidget;
-  late final Widget languageWidget;
+  late final Widget flagWidget;
 
   final Locale locale;
 
   LanguageInfo(this.locale) {
-    languageCodeWidget = Text(locale.languageCode);
+    languageCodeWidget = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(locale.languageCode.toUpperCase()),
+    );
 
     switch (locale.languageCode) {
       case "de":
-        languageWidget = showSvgFlag("de");
+        flagWidget = showSvgFlag("de");
         break;
       case "en":
-        languageWidget = showSvgFlag("gb");
+        flagWidget = showSvgFlag("gb");
         break;
       default:
-        languageWidget = languageCodeWidget;
+        flagWidget = Container();
     }
+  }
+
+  Widget get widget {
+    return Row(
+      children: [
+        flagWidget,
+        languageCodeWidget,
+      ],
+    );
   }
 }

@@ -9,5 +9,6 @@
     "player": "Player",
     "german":"German",
     "english":"English",
-    "language":"Language"
+    "language":"Language",
+    "color":"Color"
 }

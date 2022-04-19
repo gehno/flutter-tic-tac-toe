@@ -9,7 +9,6 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  static const titleColor = Colors.yellow;
   static const titleTextStyle = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.normal,
@@ -30,27 +29,40 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? selectedLocale;
+  Locale? _locale;
+  Color _mainColor = Colors.blue;
+
+
 
   void setLocale(Locale value) {
     setState(() {
-      selectedLocale = value;
+      _locale = value;
     });
   }
 
   Locale? get locale {
-    return selectedLocale;
+    return _locale;
+  }
+
+    void setMainColor(Color value) {
+    setState(() {
+      _mainColor = value;
+    });
+  }
+
+  get mainColor {
+    return _mainColor;
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: selectedLocale,
+      locale: _locale,
       onGenerateTitle: (BuildContext context) => getUiText(context).ticTacToe,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        primarySwatch: MyApp.titleColor,
+        primarySwatch: mainColor,
       ),
       home: const MyHomePage(),
     );
