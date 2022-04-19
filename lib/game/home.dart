@@ -16,18 +16,21 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Transform.scale(
-        scale: 3,
-        child: ElevatedButton.icon(
-          icon: const Icon(Icons.play_arrow),
-          label: Text(getUiText(context).play),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return GameScreen(callback);
-              },
-            ));
-          },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Transform.scale(
+          scale: 3,
+          child: ElevatedButton.icon(
+            icon: const Icon(Icons.play_arrow),
+            label: Text(getUiText(context).play),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return GameScreen(callback);
+                },
+              ));
+            },
+          ),
         ),
       ),
     );

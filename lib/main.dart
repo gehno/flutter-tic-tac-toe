@@ -99,7 +99,7 @@ class MyHomePage extends StatelessWidget {
       ),
       drawer: const DrawerWidget(),
       body: const GameHomeScreen(),
-      extendBody: false,
+      extendBody: true,
     );
   }
 }
