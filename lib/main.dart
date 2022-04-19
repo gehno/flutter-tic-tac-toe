@@ -9,11 +9,6 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  static const titleTextStyle = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.normal,
-    fontSize: 20,
-  );
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -31,8 +26,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
   Color _mainColor = Colors.blue;
-
-
+  Brightness _brightness = Brightness.light;
 
   void setLocale(Locale value) {
     setState(() {
@@ -44,14 +38,24 @@ class _MyAppState extends State<MyApp> {
     return _locale;
   }
 
-    void setMainColor(Color value) {
+  void setMainColor(Color value) {
     setState(() {
       _mainColor = value;
     });
   }
 
-  get mainColor {
+  Color get mainColor {
     return _mainColor;
+  }
+
+  void setBrightness(Brightness value) {
+    setState(() {
+      _brightness = value;
+    });
+  }
+
+  Brightness get brightness {
+    return _brightness;
   }
 
   @override
@@ -62,7 +66,9 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        primarySwatch: mainColor,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: mainColor, brightness: brightness),
+        // primarySwatch: mainColor,
       ),
       home: const MyHomePage(),
     );
@@ -78,7 +84,6 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           getUiText(context).ticTacToe,
-          style: MyApp.titleTextStyle,
         ),
         leading: Builder(
           builder: (BuildContext context) {

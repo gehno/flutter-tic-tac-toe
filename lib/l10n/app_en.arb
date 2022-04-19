@@ -10,5 +10,6 @@
     "german":"German",
     "english":"English",
     "language":"Language",
-    "color":"Color"
+    "color":"Color",
+    "darkMode":"Dark Mode"
 }

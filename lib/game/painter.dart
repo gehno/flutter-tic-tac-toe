@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class PainterWithPaint extends CustomPainter {
-  Paint _paint;
+  final Paint _paint;
 
   PainterWithPaint(this._paint);
 }

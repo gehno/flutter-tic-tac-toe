@@ -59,11 +59,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             leading: const Icon(Icons.color_lens),
             title: Text(getUiText(context).color),
-            trailing: ElevatedButton(
-              child:
-                  Text("#${Colors.red.value.toRadixString(16).toUpperCase()}"),
+            trailing: ElevatedButton.icon(
+              icon: const Icon(Icons.open_in_new),
+              label: Text(
+                  "#${MyApp.of(context).mainColor.value.toRadixString(16).toUpperCase()}"),
               onPressed: () {
                 showColorPickerDialog(context);
+              },
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.dark_mode),
+            title: Text(getUiText(context).darkMode),
+            trailing: Switch(
+              value: MyApp.of(context).brightness == Brightness.dark,
+              onChanged: (value) {
+                setDarkMode(value, context);
               },
             ),
           ),
@@ -71,22 +82,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
-}
 
-void showColorPickerDialog(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(getUiText(context).color),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              onColorChanged: (value) {}, 
-              pickerColor: Colors.red,
+  void setDarkMode(bool value, BuildContext context) {
+    setState(() {
+      if (value) {
+        MyApp.of(context).setBrightness(Brightness.dark);
+      } else {
+        MyApp.of(context).setBrightness(Brightness.light);
+      }
+    });
+  }
+
+  void showColorPickerDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(getUiText(context).color),
+            content: SingleChildScrollView(
+              child: MaterialPicker(
+                enableLabel: true,
+                portraitOnly: true,
+                onPrimaryChanged: (value) {
+                  setMainColor(context, value);
+                },
+                onColorChanged: (value) {
+                  setMainColor(context, value);
+                },
+                pickerColor: MyApp.of(context).mainColor,
+              ),
             ),
-          ),
-        );
-      });
+          );
+        });
+  }
+
+  void setMainColor(BuildContext context, Color value) {
+    setState(() {
+      MyApp.of(context).setMainColor(value);
+    });
+  }
 }
 
 class LanguageInfo {

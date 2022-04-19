@@ -2,12 +2,11 @@ import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:tic_tac_toe/game/cell.dart';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/game/model.dart';
-import 'package:tic_tac_toe/main.dart';
 
 import '../util/util.dart';
 
 class GameScreen extends StatefulWidget {
-  late GameModel model;
+  late final GameModel model;
 
   final void Function(GameResult result) callback;
 
@@ -82,11 +81,10 @@ class PlayerListener extends StatelessWidget {
             children: [
               Text(
                  getUiText(context).player,
-                style: MyApp.titleTextStyle,
               ),
               Transform.scale(
                 scale: 0.3,
-                child: model!.player.widget,
+                child: model!.player.getWidget(context),
               ),
             ],
           );

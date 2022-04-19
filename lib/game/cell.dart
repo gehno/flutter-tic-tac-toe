@@ -1,7 +1,5 @@
-import 'package:tic_tac_toe/game/home.dart';
 import 'package:tic_tac_toe/game/painter.dart';
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/main.dart';
 
 import 'game.dart';
 
@@ -10,7 +8,7 @@ class GameCell extends StatefulWidget {
   final CellContent? Function(int idx) getCellContent;
   final Function(int idx) cellClicked;
 
-  GameCell(this.index, this.getCellContent, this.cellClicked, {Key? key})
+  const GameCell(this.index, this.getCellContent, this.cellClicked, {Key? key})
       : super(key: key);
 
   @override
@@ -26,9 +24,9 @@ enum CellContent {
 }
 
 extension CellContentExt on CellContent {
-  Paint get paint {
+  Paint getPaint(BuildContext context) {
     return Paint()
-      ..color = Colors.black
+      ..color = Theme.of(context).canvasColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 15;
   }
@@ -44,17 +42,17 @@ extension CellContentExt on CellContent {
     }
   }
 
-  Widget get widget {
+  Widget getWidget(BuildContext context) {
     switch (this) {
       case CellContent.x:
         return CustomPaint(
           size: const Size.square(100),
-          painter: XPainter(paint),
+          painter: XPainter(getPaint(context)),
         );
       case CellContent.o:
         return CustomPaint(
           size: const Size.square(100),
-          painter: OPainter(paint),
+          painter: OPainter(getPaint(context)),
         );
       default:
         return const Text("");
@@ -65,12 +63,8 @@ extension CellContentExt on CellContent {
 class CellState extends State<GameCell> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all<Color>(Colors.black),
-          backgroundColor:
-              MaterialStateProperty.all<Color>(MyApp.of(context).mainColor.shade200)),
-      child: widget.getCellContent(widget.index)!.widget,
+    return ElevatedButton(
+      child: widget.getCellContent(widget.index)!.getWidget(context),
       onPressed: () => {
         setState(
           () {

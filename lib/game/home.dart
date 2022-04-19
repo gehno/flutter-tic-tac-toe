@@ -17,7 +17,7 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: Transform.scale(
-        scale: 4,
+        scale: 3,
         child: ElevatedButton.icon(
           icon: const Icon(Icons.play_arrow),
           label: Text(getUiText(context).play),
