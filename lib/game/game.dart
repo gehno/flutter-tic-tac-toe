@@ -80,7 +80,7 @@ class PlayerListener extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                 getUiText(context).player,
+                getUiText(context).player,
               ),
               Transform.scale(
                 scale: 0.3,
@@ -100,5 +100,33 @@ enum GameEndReason {
 
 class GameResult {
   final GameEndReason gameEndReason;
-  const GameResult(this.gameEndReason);
+  GameResult(this.gameEndReason);
+
+  Widget getTitle(BuildContext context) {
+    switch (gameEndReason) {
+      case GameEndReason.xWin:
+      case GameEndReason.oWin:
+        return Text(getUiText(context).win);
+      default:
+        return Text(getUiText(context).draw);
+    }
+  }
+
+  Widget getContent(BuildContext context) {
+    switch (gameEndReason) {
+      case GameEndReason.xWin:
+        return Text("${getUiText(context).player} X ${getUiText(context).isTheWinner}");
+      case GameEndReason.oWin:
+        return Text("${getUiText(context).player} O ${getUiText(context).isTheWinner}");
+      default:
+        return Text(getUiText(context).gameOver);
+    }
+  }
+
+  Widget getDialog(BuildContext context) {
+    return AlertDialog(
+      title: getTitle(context),
+      content: getContent(context),
+    );
+  }
 }

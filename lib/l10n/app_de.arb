@@ -11,5 +11,9 @@
     "english":"Englisch",
     "language":"Sprache",
     "color":"Farbe",
-    "darkMode":"Dunkler Modus"
+    "darkMode":"Dunkler Modus",
+    "gameOver":"Spiel Ende",
+    "win":"Sieg",
+    "isTheWinner":"ist der Sieger",
+    "draw":"Unentschieden"
 }

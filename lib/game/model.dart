@@ -97,7 +97,7 @@ class GameModel extends PropertyChangeNotifier<String> {
 
     if (!gameState.containsValue(CellContent.none)) {
       //Game Over
-      callback.call(const GameResult(GameEndReason.gameOver));
+      callback.call(GameResult(GameEndReason.gameOver));
     }
   }
 }

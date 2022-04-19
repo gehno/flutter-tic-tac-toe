@@ -11,5 +11,9 @@
     "english":"English",
     "language":"Language",
     "color":"Color",
-    "darkMode":"Dark Mode"
+    "darkMode":"Dark Mode",
+    "gameOver":"Game Over",
+    "win":"Win",
+    "isTheWinner":"is the Winner",
+    "draw":"Draw"
 }
