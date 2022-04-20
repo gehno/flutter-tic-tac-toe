@@ -25,8 +25,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
-  Color _mainColor = Colors.blue;
-  Brightness _brightness = Brightness.light;
+  Color _mainColor = randomColor();
+  Brightness _brightness = isNight()?Brightness.dark:Brightness.light;
 
   void setLocale(Locale value) {
     setState(() {
@@ -66,13 +66,15 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: mainColor, brightness: brightness),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: mainColor, brightness: brightness),
         // primarySwatch: mainColor,
       ),
       home: const MyHomePage(),
     );
   }
+
+
 }
 
 class MyHomePage extends StatelessWidget {
