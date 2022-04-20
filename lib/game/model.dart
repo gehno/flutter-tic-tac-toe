@@ -92,12 +92,14 @@ class GameModel extends PropertyChangeNotifier<String> {
       final result = playerVector & element;
       if (result == element) {
         callback.call(GameResult(player.gameEndReason));
+        return;
       }
     }
 
     if (!gameState.containsValue(CellContent.none)) {
       //Game Over
       callback.call(GameResult(GameEndReason.gameOver));
+      return;
     }
   }
 }

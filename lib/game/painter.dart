@@ -1,15 +1,25 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 abstract class PainterWithPaint extends CustomPainter {
   final BuildContext _context;
+
+  MaskFilter backgroundBlur =
+      MaskFilter.blur(BlurStyle.normal, Shadow.convertRadiusToSigma(5));
   PainterWithPaint(this._context);
 
-  Paint get _paint {
+  Color get primaryColor => Theme.of(_context).canvasColor;
+  Color get backgroundColor => Theme.of(_context).backgroundColor;
+
+  Paint getPaint(
+    Color color, [
+    MaskFilter? maskFilter,
+  ]) {
     return Paint()
-      ..color = Theme.of(_context).canvasColor
+      ..color = color
       ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..maskFilter = maskFilter
       ..strokeWidth = 15;
   }
 }
@@ -37,8 +47,20 @@ class XPainter extends PainterWithPaint {
     Offset rightTop = Offset(
         size.width - size.width * rightFraction, size.height * rightFraction);
     Offset leftBot = Offset(0, size.height);
-    canvas.drawLine(leftTop, rightBot, _paint);
-    canvas.drawLine(rightTop, leftBot, _paint);
+
+    canvas.drawLine(leftTop.translate(5, 5), rightBot.translate(5, 5),
+        getPaint(backgroundColor, backgroundBlur));
+
+    if (_fraction > .5) {
+      canvas.drawLine(rightTop.translate(5, 5), leftBot.translate(5, 5),
+          getPaint(backgroundColor, backgroundBlur));
+    }
+
+    canvas.drawLine(leftTop, rightBot, getPaint(primaryColor));
+
+    if (_fraction > .5) {
+      canvas.drawLine(rightTop, leftBot, getPaint(primaryColor));
+    }
   }
 
   @override
@@ -53,9 +75,13 @@ class OPainter extends PainterWithPaint {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var rect = const Offset(0,0) & size;
+    var rect = const Offset(0, 0) & size;
 
-    canvas.drawArc(rect, -pi / 2, 2 * pi * _fraction, false, _paint);
+        canvas.drawArc(
+        rect.translate(5, 5), -pi / 2, 2 * pi * _fraction, false, getPaint(backgroundColor,backgroundBlur));
+
+    canvas.drawArc(
+        rect, -pi / 2, 2 * pi * _fraction, false, getPaint(primaryColor));
   }
 
   @override
