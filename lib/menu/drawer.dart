@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tic_tac_toe/menu/more.dart';
 import 'package:tic_tac_toe/menu/settings.dart';
 import 'package:tic_tac_toe/menu/stats.dart';
@@ -20,12 +21,18 @@ class DrawerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             DrawerHeader(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              decoration: BoxDecoration(color: Theme.of(context).hoverColor),
+              child: Stack(
                 children: [
-                  Text(
-                    getUiText(context).options,
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: SvgPicture.asset("../assets/logo.svg")),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      getUiText(context).options,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                 ],
               ),
@@ -70,7 +77,7 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             ListTile(
-              tileColor: Theme.of(context).highlightColor,
+              tileColor: Theme.of(context).hoverColor,
               leading: const Icon(Icons.info),
               title: Text(getUiText(context).info),
               onTap: () {
