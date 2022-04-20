@@ -84,7 +84,7 @@ class PlayerListener extends StatelessWidget {
               ),
               Transform.scale(
                 scale: 0.3,
-                child: model!.player.getWidget(context),
+                child: model!.player.widget,
               ),
             ],
           );
@@ -115,9 +115,11 @@ class GameResult {
   Widget getContent(BuildContext context) {
     switch (gameEndReason) {
       case GameEndReason.xWin:
-        return Text("${getUiText(context).player} X ${getUiText(context).isTheWinner}");
+        return Text(
+            "${getUiText(context).player} X ${getUiText(context).isTheWinner}");
       case GameEndReason.oWin:
-        return Text("${getUiText(context).player} O ${getUiText(context).isTheWinner}");
+        return Text(
+            "${getUiText(context).player} O ${getUiText(context).isTheWinner}");
       default:
         return Text(getUiText(context).gameOver);
     }

@@ -1,6 +1,5 @@
-import 'package:tic_tac_toe/game/painter.dart';
 import 'package:flutter/material.dart';
-
+import 'animated_fraction_widget.dart';
 import 'game.dart';
 
 class GameCell extends StatefulWidget {
@@ -24,13 +23,6 @@ enum CellContent {
 }
 
 extension CellContentExt on CellContent {
-  Paint getPaint(BuildContext context) {
-    return Paint()
-      ..color = Theme.of(context).canvasColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 15;
-  }
-
   GameEndReason get gameEndReason {
     switch (this) {
       case CellContent.x:
@@ -42,18 +34,12 @@ extension CellContentExt on CellContent {
     }
   }
 
-  Widget getWidget(BuildContext context) {
+  Widget get widget {
     switch (this) {
       case CellContent.x:
-        return CustomPaint(
-          size: const Size.square(100),
-          painter: XPainter(getPaint(context)),
-        );
+        return const XWidget();
       case CellContent.o:
-        return CustomPaint(
-          size: const Size.square(100),
-          painter: OPainter(getPaint(context)),
-        );
+        return const OWidget();
       default:
         return const Text("");
     }
@@ -64,7 +50,7 @@ class CellState extends State<GameCell> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: widget.getCellContent(widget.index)!.getWidget(context),
+      child: widget.getCellContent(widget.index)!.widget,
       onPressed: () => {
         setState(
           () {
