@@ -84,7 +84,18 @@ class PlayerListener extends StatelessWidget {
               ),
               Transform.scale(
                 scale: 0.3,
-                child: model!.player.widget,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox.square(
+                    dimension: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        model!.nextPlayer();
+                      },
+                      child: model!.player.widget,
+                    ),
+                  ),
+                ),
               ),
             ],
           );
