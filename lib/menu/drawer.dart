@@ -26,7 +26,7 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: SvgPicture.asset("../assets/logo.svg")),
+                      child: SvgPicture.asset("../images/logo.svg")),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
